@@ -1,0 +1,48 @@
+# BEGIN Configs UNEB
+
+<Files wp-login.php>
+        order deny,allow
+        Deny from all
+        Allow from 10.129.0.0/16
+        Allow from 192.168.5.15
+        Allow from 172.16.12.0/22
+</Files>
+
+<Files xmlrpc.php>
+        order deny,allow
+        Deny from all
+        Allow from 10.129.0.0/16
+        Allow from 192.168.5.15
+</Files>
+
+
+#END Configs UNEB
+
+# BEGIN WordPress
+# As diretrizes (linhas) entre "BEGIN WordPress" e "END WordPress" são
+# geradas dinamicamente e só devem ser modificadas através de filtros do WordPress.
+# Quaisquer alterações nas diretivas entre esses marcadores serão sobrescritas.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+# Wordfence WAF
+<Files ".user.ini">
+<IfModule mod_authz_core.c>
+	Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+	Order deny,allow
+	Deny from all
+</IfModule>
+</Files>
+
+# END Wordfence WAF

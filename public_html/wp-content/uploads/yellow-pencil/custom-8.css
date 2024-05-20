@@ -1,0 +1,71 @@
+/*
+
+    The following CSS codes are created by the YellowPencil plugin.
+    https://yellowpencil.waspthemes.com/
+
+
+    T A B L E   O F   C O N T E N T S
+    ........................................................................
+
+    01. Non-Static Homepage
+
+*/
+
+
+
+/*-----------------------------------------------*/
+/*  Non-Static Homepage                          */
+/*-----------------------------------------------*/
+body.home #featured-news-events .recent-events{
+	visibility:hidden;
+}
+
+body.home #featured-news-events{
+	-webkit-transform:translatex(387px) translatey(-14px);	-ms-transform:translatex(387px) translatey(-14px);	transform:translatex(387px) translatey(-14px);
+}
+
+body.home #featured-news-events .recent-news{
+	-webkit-transform:translatex(-194px) translatey(0px);	-ms-transform:translatex(-194px) translatey(0px);	transform:translatex(-194px) translatey(0px);
+	margin-right:202px;
+	position:relative;
+	left:-37px;
+}
+
+body.home #featured-news-events .recent-news h1{
+	-webkit-transform:translatex(94px) translatey(-3px);	-ms-transform:translatex(94px) translatey(-3px);	transform:translatex(94px) translatey(-3px);
+}
+
+body.home #footer-widgets .custom-html-widget div{
+	display:inline-block;
+	-webkit-transform:translatex(115px) translatey(-21px);	-ms-transform:translatex(115px) translatey(-21px);	transform:translatex(115px) translatey(-21px);
+}
+
+body.home #footer-widgets .footer-widget-area{
+	min-height:193px;
+}
+
+@media (max-width:610px){
+
+	body.home #featured-news-events .recent-news{
+	-webkit-transform:translatex(-304px) translatey(-6px);	-ms-transform:translatex(-304px) translatey(-6px);	transform:translatex(-304px) translatey(-6px);
+}
+
+body.home #featured-news-events .recent-news h1{
+	-webkit-transform:translatex(31px) translatey(-3px);	-ms-transform:translatex(31px) translatey(-3px);	transform:translatex(31px) translatey(-3px);
+}
+
+body.home .recent-news .news-post{
+	-webkit-transform:translatex(6px) translatey(0px);	-ms-transform:translatex(6px) translatey(0px);	transform:translatex(6px) translatey(0px);
+	}
+
+}
+
+
+
+@media (min-width:768px){
+
+	body.home #featured-news-events .recent-events{
+	padding-left:187px;
+	}
+
+}
