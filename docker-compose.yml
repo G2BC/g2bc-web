@@ -6,15 +6,16 @@ services:
     image: wordpress:latest
     container_name: g2bc
     restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./public_html/wp-content:/var/www/html/wp-content
+      - ./wp_data:/var/www/html/
     environment:
-      WORDPRESS_DB_HOST: '${WORDPRESS_DB_HOST}'
+      WORDPRESS_DB_HOST: '${WORDPRESS_DB_HOST}:3306'
       WORDPRESS_DB_USER: '${WORDPRESS_DB_USER}'
       WORDPRESS_DB_PASSWORD: '${WORDPRESS_DB_PASSWORD}'
       WORDPRESS_DB_NAME: '${WORDPRESS_DB_NAME}'
-    ports:
-      - 8001:80
-    volumes:
-      - ./public_html:/var/www/html
     depends_on:
       - db
     networks:
@@ -24,17 +25,33 @@ services:
     container_name: '${WORDPRESS_DB_HOST}'
     image: mysql:8.0
     restart: always
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./g2bcun_geral:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+      - 33060
     environment:
       MYSQL_DATABASE: '${MYSQL_DATABASE}'
       MYSQL_USER: '${MYSQL_USER}'
       MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
       MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
     command: '--default-authentication-plugin=mysql_native_password'
-    volumes:
-      - ./db:/var/lib/mysql
-      - ./g2bcun_geral:/docker-entrypoint-initdb.d
+    networks:
+      - internal
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
     ports:
-      - 3306:3306
+      - '3000:80'
+    environment:
+      PMA_HOST: '${WORDPRESS_DB_HOST}'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}' 
+    depends_on:
+      - db
     networks:
       - internal
 
@@ -43,5 +60,5 @@ networks:
     external: true
 
 volumes:
-  public_html:
+  wp_data:
   db:
